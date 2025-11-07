@@ -20,7 +20,6 @@
     background: radial-gradient(circle at 20% 20%, #14002a, #050013 80%);
   }
 
-  /* animated IT-style background grid */
   body::before {
     content: "";
     position: fixed;
@@ -45,7 +44,6 @@
     to { transform: translate(-50%, -50%); }
   }
 
-  /* Transparent Glass Effect for Portfolio Container */
   .portfolio-container {
     position: relative;
     z-index: 2;
@@ -69,12 +67,10 @@
     box-shadow: 0 0 80px rgba(183, 136, 255, 0.6);
   }
 
-  /* 3D tilt on mouse move */
   body:hover .portfolio-container {
     transform-style: preserve-3d;
   }
 
-  /* Site Title on top-left */
   .site-title {
     position: absolute;
     top: 24px;
@@ -87,7 +83,6 @@
     user-select: none;
   }
 
-  /* Top-right navigation */
   nav.top-right-nav {
     position: absolute;
     top: 26px;
@@ -112,7 +107,6 @@
     border-bottom-color: #b788ff;
   }
 
-  /* Left main content */
   .content-left {
     flex: 1 1 600px;
     display: flex;
@@ -224,6 +218,30 @@
     user-select: none;
   }
 
+  /* ✨ Design-only Next/Previous buttons */
+  .page-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+  }
+  .page-button {
+    background: rgba(183, 136, 255, 0.15);
+    color: #e1dcff;
+    border: 1px solid #b788ff;
+    border-radius: 12px;
+    padding: 10px 24px;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    user-select: none;
+    pointer-events: none; /* not clickable yet */
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  .page-button:hover {
+    background: rgba(183, 136, 255, 0.3);
+    transform: scale(1.05);
+  }
+
   @media (max-width: 1040px) {
     .portfolio-container {
       width: 100%;
@@ -284,6 +302,13 @@
         </p>
       </div>
     </div>
+
+    <!-- ✨ Non-clickable Next & Previous buttons (design only) -->
+    <div class="page-buttons">
+      <div class="page-button">← Previous</div>
+      <div class="page-button">Next →</div>
+    </div>
+
   </div>
 
   <div class="photo-container" aria-label="Profile picture">
@@ -292,6 +317,7 @@
 </div>
 
 <script>
+  // Keep all your existing interactivity
   const tabs = document.querySelectorAll('.tab');
   const slidesContainer = document.querySelector('.slides');
   const contentSlider = document.querySelector('.content-slider');
@@ -308,7 +334,7 @@
     });
   });
 
-  // 3D cursor tilt
+  // 3D tilt
   const container = document.querySelector('.portfolio-container');
   document.addEventListener('mousemove', (e) => {
     const x = (window.innerWidth / 2 - e.pageX) / 50;

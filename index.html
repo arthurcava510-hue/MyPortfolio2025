@@ -191,7 +191,19 @@
       color: #d3d1ffdd;
       user-select: text;
     }
+    
+.slide-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
 
+.slide-content img {
+  width: 120px;
+  height: auto;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
     .photo-container {
       flex-shrink: 0;
       width: 210px;
@@ -348,32 +360,55 @@
       </nav>
 
       <div class="content-slider">
-        <div class="slides">
-  <p class="slide">I am currently a first-year college student at the University of the Cordilleras, pursuing a Bachelor of Science in Information Technology with a major in Network and Security.
-    <img src="IMG_8743.jpeg" alt="University of the Cordilleras Logo" style="width:120px; border-radius:10px; margin-bottom:10px;">
-    <br> 
-  </p>    
+        <p class="slide">
+  <div class="slide-content">
+    <img src="IMG_8743.jpeg" alt="University of the Cordilleras Logo">
+    <span>
+      I am currently a first-year college student at the University of the Cordilleras, pursuing a Bachelor of Science in Information Technology with a major in Network and Security.
+    </span>
+  </div>
+</p>
+
 
   <p class="slide">
-    <img src="IMG_8742.jpeg" alt="Gov. Manuel D. Barretto National High School Logo" style="width:120px; border-radius:10px; margin-bottom:10px;">
-    <br> I graduated Senior High School at Gov. Manuel D. Barretto National High School.
-  </p>
+  <div class="slide-content">
+    <img src="IMG_8742.jpeg" alt="Gov. Manuel D. Barretto National High School Logo">
+    <span>
+      I graduated Senior High School at Gov. Manuel D. Barretto National High School.
+    </span>
+  </div>
+</p>
+
 
   <p class="slide">
-    <img src="IMG_8742.jpeg" alt="High School Logo" style="width:120px; border-radius:10px; margin-bottom:10px;">
-    <br> I completed my High School at Gov. Manuel D. Barretto National High School.
-  </p>
+  <div class="slide-content">
+    <img src="IMG_8742.jpeg" alt="High School Logo">
+    <span>
+      I completed my High School at Gov. Manuel D. Barretto National High School.
+    </span>
+  </div>
+</p>
+
 
   <p class="slide">
-    <img src="IMG_8741.jpeg" alt="Maloma Community Elementary School Logo" style="width:120px; border-radius:10px; margin-bottom:10px;">
-    <br> I completed my elementary education at Maloma Community Elementary School.
-  </p>
+  <div class="slide-content">
+    <img src="IMG_8741.jpeg" alt="Elementary School Logo">
+    <span>
+      I completed my elementary education at Maloma Community Elementary School.
+    </span>
+  </div>
+</p>
+
 
   <p class="slide">
-    <img src="IMG_8741.jpeg" alt="Kindergarten Logo" style="width:120px; border-radius:10px; margin-bottom:10px;">
-    <br> I completed my Kindergarten education at Maloma Community Elementary School.
-  </p>
-</div>
+  <div class="slide-content">
+    <img src="IMG_8741.jpeg" alt="Kindergarten Logo">
+    <span>
+      I completed my Kindergarten education at Maloma Community Elementary School.
+    </span>
+  </div>
+</p>
+
       </div>
 
       <div class="page-buttons" style="justify-content: space-between;">
@@ -459,6 +494,7 @@
 
 </body>
 </html>
+
 
 
 

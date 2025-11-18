@@ -177,20 +177,24 @@
     .content-slider::-webkit-scrollbar-thumb { background: #b7aeff; border-radius: 4px; }
     .content-slider::-webkit-scrollbar-thumb:hover { background: #d0baff; }
 
-    .slides {
-      display: flex;
-      width: 500%;
-      transition: transform 0.5s ease-in-out;
-    }
-
     .slide {
-      width: 20%;
-      padding-right: 30px;
-      box-sizing: border-box;
-      line-height: 1.6;
-      color: #d3d1ffdd;
-      user-select: text;
-    }
+  width: 20%;
+  padding-right: 30px;
+  box-sizing: border-box;
+  line-height: 1.6;
+  color: #d3d1ffdd;
+  user-select: text;
+
+  display: flex;             /* make paragraph + image side-by-side */
+  align-items: center;
+  gap: 20px;
+}
+.slide img {
+  width: 120px;
+  height: auto;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
     
 .slide-content {
   display: flex;
@@ -473,6 +477,7 @@
 
 </body>
 </html>
+
 
 
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -11,69 +11,23 @@
       margin: 0;
       font-family: 'Poppins', sans-serif;
       color: #d0ceff;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 80px 20px 40px;
+      height: 100vh;
       overflow: hidden;
       background: radial-gradient(circle at 20% 20%, #14002a, #050013 80%);
     }
-    
 
-    body::before {
-      content: "";
-      position: fixed;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: repeating-linear-gradient(
-        60deg,
-        rgba(0, 255, 255, 0.08) 0%,
-        rgba(255, 0, 255, 0.08) 10%,
-        transparent 10%,
-        transparent 20%
-      );
-      background-size: 300% 300%;
-      animation: moveGrid 25s linear infinite;
-      z-index: 0;
-    }
-
-    @keyframes moveGrid {
-      from { transform: translate(0, 0); }
-      to { transform: translate(-50%, -50%); }
-    }
-
-    .portfolio-container {
+    .page {
+      height: 100vh;
+      display: none;
       position: relative;
-      z-index: 2;
-      width: 980px;
-      background: rgba(255,255,255,0.08);
-      border: 2px solid rgba(255,255,255,0.2);
-      backdrop-filter: blur(25px) saturate(180%);
-      -webkit-backdrop-filter: blur(25px) saturate(180%);
-      border-radius: 30px;
-      padding: 40px 50px 50px 50px;
-      box-shadow: 0 0 40px rgba(183,136,255,0.4);
-      display: flex;
-      margin-bottom: 15%;
-      gap: 60px;
-      align-items: flex-start;
-      user-select: text;
-      transition: transform 0.2s ease, box-shadow 0.3s ease;
     }
 
-    .portfolio-container:hover {
-      box-shadow: 0 0 80px rgba(183,136,255,0.6);
-    }
-
-    body:hover .portfolio-container {
-      transform-style: preserve-3d;
+    .page.active {
+      display: block;
     }
 
     .site-title {
-      position: absolute;
+      position: fixed;
       top: 24px;
       left: 50px;
       font-size: 1.4rem;
@@ -82,10 +36,11 @@
       text-shadow: 0 0 15px #9f94ffcc;
       letter-spacing: 0.15em;
       user-select: none;
+      z-index: 10;
     }
 
     nav.top-right-nav {
-      position: absolute;
+      position: fixed;
       top: 26px;
       right: 50px;
       display: flex;
@@ -94,6 +49,7 @@
       font-size: 1rem;
       color: #b7aeff;
       user-select: none;
+      z-index: 10;
     }
 
     nav.top-right-nav a {
@@ -111,10 +67,25 @@
       border-bottom-color: #b788ff;
     }
 
+    .content-wrapper {
+      height: 100vh;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-start;
+      gap: 60px;
+      justify-content: center;
+      padding-top: 80px;
+      padding-bottom: 100px;
+      box-sizing: border-box;
+    }
+
     .content-left {
       flex: 1 1 600px;
       display: flex;
       flex-direction: column;
+      height: 100%;
+      padding-right: 20px;
     }
 
     .header { margin-bottom: 30px; }
@@ -138,57 +109,19 @@
       letter-spacing: 0.05em;
     }
 
-    .tabs {
-      display: flex;
-      margin-top: 10px;
-      gap: 40px;
-    }
-
-    .tab {
-      background: transparent;
-      border: none;
-      font-weight: 700;
-      font-size: 1.15rem;
-      cursor: pointer;
-      color: #b7aeffcc;
-      position: relative;
-      padding-bottom: 6px;
-      transition: color 0.3s ease, border-bottom 0.3s ease;
-      letter-spacing: 0.03em;
-    }
-    
-    .tab:hover { color: #d0baff; }
-
-    .tab.active {
-      color: #d0baff;
-      border-bottom: 2px solid #b788ff;
-    }
-
     .content-slider {
-      overflow-x: hidden; /* hides horizontal scrollbar */
-      overflow-y: auto;   /* keeps vertical scroll if needed */
-    }
-    
-
-    .slides {
-      display: flex;
-      width: 500%;
-      transition: transform 0.5s ease-in-out;
-    }
-
-    .slide {
-      width: 20%;
-      padding-right: 30px;
-      box-sizing: border-box;
+      overflow: visible;
       line-height: 1.6;
       color: #d3d1ffdd;
       user-select: text;
+      flex-grow: 1;
     }
-.slide {
-  display: flex;         /* makes children sit in a row */
-  gap: 30px;             /* space between picture and text */
-  align-items: flex-start; /* aligns text to top of image */
-}
+
+    .content-slider.grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
 
     .photo-container {
       flex-shrink: 0;
@@ -198,17 +131,11 @@
       box-shadow: 0 0 30px 6px #b788ffcc;
       background: radial-gradient(circle at center, #b788ff 20%, transparent 80%);
       margin-top: 18%;
-      margin-right: 10%;
       display: flex;
       justify-content: center;
       align-items: center;
       filter: drop-shadow(0 0 10px #b788ffee);
-      transition: box-shadow 0.3s ease;
       user-select: none;
-    }
-
-    .photo-container:hover {
-      box-shadow: 0 0 90px 34px #d2b7ffee;
     }
 
     .photo-container img {
@@ -223,9 +150,12 @@
     }
 
     .page-buttons {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
       display: flex;
-      justify-content: center;
-      margin-top: 20px;
+      justify-content: space-between;
     }
 
     .page-button {
@@ -248,237 +178,241 @@
     }
 
     @media (max-width:1040px) {
-      .portfolio-container {
-        width: 100%;
+      .content-wrapper {
         flex-direction: column;
         align-items: center;
-        padding: 30px;
         gap: 40px;
-        position: relative;
+        padding-top: 100px;
+        padding-bottom: 120px;
+      }
+      .content-slider.grid {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 
     @media (max-width:520px) {
       .name { font-size: 2.2rem; }
       .title { font-size: 1.2rem; }
+      .content-slider.grid {
+        grid-template-columns: 1fr;
+      }
     }
-    #page2 .content-slider {
-  overflow-x: hidden;
-  overflow-y: auto;
-  max-height: 500px; /* Limit height to prevent vertical overflow */
-}
 
-#page2 .slides {
-  width: 500%;
-  overflow: hidden;
-}
+    .content-item {
+      margin-bottom: 20px;
+    }
 
-#page2 .slide {
-  width: 20%;
-  box-sizing: border-box;
-  overflow: hidden;
-}
+    .content-item.grid-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
 
-#page2 img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 0 20px #b788ffcc;
-}
+    .content-item img {
+      width: 100%;
+      max-width: 140px;
+      height: auto;
+      border-radius: 12px;
+      border: 3px solid #b788ff;
+      box-shadow: 0 0 20px #b788ffcc;
+      margin-bottom: 10px;
+    }
 
+    /* Specific smaller images for page 2 */
+    #page2 .content-item img {
+      max-width: 100px;
+    }
 
-#page3 .content-slider {
-  overflow-x: hidden;   /* prevent sideways overflow */
-  overflow-y: auto;     /* allow vertical scroll */
-  max-height: 500px;    /* keeps everything inside container */
-}
-
-#page3 .slides {
-  width: 500%;          /* needed for sliding animation */
-  overflow: hidden;     /* prevent overflow */
-}
-
-#page3 .slide {
-  width: 20%;
-  box-sizing: border-box;
-  overflow: hidden;
-}
-
-#page3 img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 0 20px #b788ffcc;
-}
-
-
+    /* Larger image for the last item on page 3 */
+    #page3 .content-item.grid-item:nth-child(5) img {
+      max-width: 160px;
+    }
   </style>
 </head>
 
 <body>
 
   <!-- PAGE 1 -->
-  <div class="portfolio-container" id="page1">
+  <div class="page active" id="page1">
     <div class="site-title">MyPortfolio</div>
     <nav class="top-right-nav">
       <a href="#" class="active" data-page="1">Home</a>
       <a href="#" data-page="2">Education</a>
       <a href="#" data-page="3">Achievements</a>
+      <a href="#" data-page="4">My Family</a>
     </nav>
 
-    <div class="content-left">
-      <header class="header">
-        <h1 class="name">Arthur Rey Cava</h1>
-        <p class="title">Bachelor of Science in Information Technology</p>
-        <p class="title">About me</p>
-      </header>
+    <div class="content-wrapper">
+      <div class="content-left">
+        <header class="header">
+          <h1 class="name">Arthur Rey Cava</h1>
+          <p class="title">Bachelor of Science in Information Technology</p>
+          <p class="title">About me</p>
+        </header>
 
-      <nav class="tabs">
-        <button class="tab active" data-index="0">Early Life</button>
-        <button class="tab" data-index="1">School</button>
-        <button class="tab" data-index="2">Dreams</button>
-        <button class="tab" data-index="3">Personal Life</button>
-        <button class="tab" data-index="4">Goal</button>
-      </nav>
-
-      <div class="content-slider">
-        <div class="slides">
-          <p class="slide">
-            Hello I'm Arthur Rey Cava. Born in the province of Zambales, my passion for technology began at an early age when I spent much of my time in my brother’s computer shop. He also dreamed of becoming an IT professional, and being surrounded by computers, gadgets, and curious minds inspired me to follow the same path. From that point on, I knew I wanted to work with technology — to understand how it functions and how it can make life better.
-          </p>
-          <p class="slide">
-            During high school, I sharpened my skills in programming, joining competitions, and exploring various technologies that motivated me to deepen my knowledge and improve my skill.
-          </p>
-          <p class="slide">
-            My dream is to become a leading frontend developer who creates meaningful user experiences and innovative interfaces that inspire users and solve real problems.
-          </p>
-          <p class="slide">
-            Outside of coding, I love to travel, capture moments through photography, and learn about new cultures. Balance in life helps me stay creative and productive.
-          </p>
-          <p class="slide">
-            I believe that technology must be accessible to all, and great design should simplify complexity. My goal is to create with empathy and precision, putting users at the heart of development.
-          </p>
+        <div class="content-slider">
+          <div class="content-item">
+            Hello, I'm Arthur Rey Cava. Born in Zambales, my passion for technology began early in my brother's computer shop. Surrounded by gadgets, I dreamed of becoming an IT professional. From then on, I knew I wanted to work with technology to understand and improve life. My dream is to become a leading frontend developer who creates meaningful user experiences and innovative interfaces that inspire users and solve real problems. I believe that technology must be accessible to all, and great design should simplify complexity. My goal is to create with empathy and precision, putting users at the heart of development.
+          </div>
         </div>
+      </div>
+
+      <div class="photo-container">
+        <img src="Profile.jpg" alt="Arthur Rey Cava profile picture">
       </div>
     </div>
 
-    <div class="photo-container">
-      <img src="Profile.jpg" alt="Arthur Rey Cava profile picture">
-    </div>
-
-    <div class="page-buttons" style="position: absolute; bottom: 50px; right: 50px;">
+    <div class="page-buttons">
+      <div></div> <!-- Placeholder for left side -->
       <div class="page-button" id="next1">Next →</div>
     </div>
   </div>
 
-<!-- PAGE 2 -->
-<div class="portfolio-container" id="page2" style="display:none;">
-  <div class="site-title">MyPortfolio</div>
-  <nav class="top-right-nav">
-    <a href="#" data-page="1">Home</a>
-    <a href="#" class="active" data-page="2">Education</a>
-    <a href="#" data-page="3">Achievements</a>
-  </nav>
-
-  <div class="content-left">
-    <header class="header">
-      <h1 class="name">Arthur Rey Cava</h1>
-      <p class="title">Educational Attainment</p>
-    </header>
-
-    <nav class="tabs">
-      <button class="tab active" data-index="0">College (2025-present)</button>
-      <button class="tab" data-index="1">Senior High School (2023-2025)</button>        
-      <button class="tab" data-index="2">High School (2019-2023)</button>
-      <button class="tab" data-index="3">Elementary (2014-2019)</button>
-      <button class="tab" data-index="4">Kindergarten (2013-2014)</button>
+  <!-- PAGE 2 -->
+  <div class="page" id="page2">
+    <div class="site-title">MyPortfolio</div>
+    <nav class="top-right-nav">
+      <a href="#" data-page="1">Home</a>
+      <a href="#" class="active" data-page="2">Education</a>
+      <a href="#" data-page="3">Achievements</a>
+      <a href="#" data-page="4">My Family</a>
     </nav>
 
-<div class="content-slider">
-  <div class="slides">
-    <p class="slide">
-      <img src="IMG_8743.jpeg" alt="University Logo" style="width:250px; border-radius:12px; box-shadow:0 0 10px rgba(0,0,0,0.3);">
-      🎓 Currently embarking on my college journey at the University of the Cordilleras, pursuing a Bachelor of Science in Information Technology with a focus on Network and Security. Excited to dive into the world of tech and cybersecurity!
-    </p>
-    <p class="slide">
-      <img src="IMG_8742.jpeg" alt="High School Logo" style="width:250px; border-radius:12px; box-shadow:0 0 10px rgba(0,0,0,0.3);">
-      🏫 Proud graduate of Senior High School at Gov. Manuel D. Barretto National High School, where I honed my skills and prepared for the next big step in my education.
-    </p>
-    <p class="slide">
-      <img src="IMG_8742.jpeg" alt="High School Logo" style="width:250px; border-radius:12px; box-shadow:0 0 10px rgba(0,0,0,0.3);">
-      🎓 Completed my High School journey at Gov. Manuel D. Barretto National High School — a foundation that shaped my academic growth and personal development.
-    </p>
-    <p class="slide">
-      <img src="IMG_8741.jpeg" alt="Elementary Logo" style="width:250px; border-radius:12px; box-shadow:0 0 10px rgba(0,0,0,0.3);">
-      🏫 Completed elementary education at Maloma Community Elementary School, where curiosity and learning first sparked my love for knowledge.
-    </p>
-    <p class="slide">
-      <img src="IMG_8741.jpeg" alt="Elementary Logo" style="width:250px; border-radius:12px; box-shadow:0 0 10px rgba(0,0,0,0.3);">
-      🌟 Started my educational journey in Kindergarten at Maloma Community Elementary School — the first step of a lifelong adventure in learning!
-    </p>
-  </div>
-</div>
+    <div class="content-wrapper">
+      <div class="content-left">
+        <header class="header">
+          <p class="title">Educational Attainment</p>
+        </header>
 
+        <div class="content-slider grid">
+          <div class="content-item grid-item">
+            <img src="IMG_8743.jpeg" alt="University Logo">
+            <strong>College (2025-present):</strong><br>
+            Currently embarking on my college journey at the University of the Cordilleras, pursuing a Bachelor of Science in Information Technology with a focus on Network and Security. Excited to dive into the world of tech and cybersecurity!
+          </div>
+          <div class="content-item grid-item">
+            <img src="IMG_8742.jpeg" alt="High School Logo">
+            <strong>Senior High School (2023-2025):</strong><br>
+            Proud graduate of Senior High School at Gov. Manuel D. Barretto National High School, where I honed my skills and prepared for the next big step in my education.
+          </div>
+          <div class="content-item grid-item">
+            <img src="IMG_8742.jpeg" alt="High School Logo">
+            <strong>High School (2019-2023):</strong><br>
+            Completed my High School journey at Gov. Manuel D. Barretto National High School — a foundation that shaped my academic growth and personal development.
+          </div>
+          <div class="content-item grid-item">
+            <img src="IMG_8741.jpeg" alt="Elementary Logo">
+            <strong>Elementary (2014-2019):</strong><br>
+            Completed elementary education at Maloma Community Elementary School, where curiosity and learning first sparked my love for knowledge.
+          </div>
+          <div class="content-item grid-item">
+            <img src="IMG_8741.jpeg" alt="Elementary Logo">
+            <strong>Kindergarten (2013-2014):</strong><br>
+            Started my educational journey in Kindergarten at Maloma Community Elementary School — the first step of a lifelong adventure in learning!
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <div class="page-buttons" style="justify-content: space-between;">
+    <div class="page-buttons">
       <div class="page-button" id="prev2">← Previous</div>
       <div class="page-button" id="next2">Next →</div>
     </div>
   </div>
-</div>
 
-
-<!-- PAGE 3 -->
-<div class="portfolio-container" id="page3" style="display:none;">
-  <div class="site-title">MyPortfolio</div>
-  <nav class="top-right-nav">
-    <a href="#" data-page="1">Home</a>
-    <a href="#" data-page="2">Education</a>
-    <a href="#" class="active" data-page="3">Achievements</a>
-  </nav>
-
-  <div class="content-left">
-    <header class="header">
-      <p class="title">Achievements</p>
-    </header>
-
-    <nav class="tabs">
-      <button class="tab active" data-index="0">Senior High School Graduate(2025)</button>
-      <button class="tab" data-index="1">Work Immersion(2025)</button>
-      <button class="tab" data-index="2">DSPC Qualifier (2024&2025)</button>
-      <button class="tab" data-index="3">Billiards Zonal 1st Place(2025)</button>
-      <button class="tab" data-index="4">With Honors</button>
+  <!-- PAGE 3 -->
+  <div class="page" id="page3">
+    <div class="site-title">MyPortfolio</div>
+    <nav class="top-right-nav">
+      <a href="#" data-page="1">Home</a>
+      <a href="#" data-page="2">Education</a>
+      <a href="#" class="active" data-page="3">Achievements</a>
+      <a href="#" data-page="4">My Family</a>
     </nav>
 
-<div class="content-slider">
-  <div class="slides">
-    <p class="slide">
-      <img src="SHS Grad.jpeg" alt="Achievement 1" style="width:650px; border-radius:12px; box-shadow:0 0 10px rgba(0,0,0,0.3);">
-      🎓 Proudly graduated with 6 Sparkling medals across academics, co-curricular, and sports! Highlights include Graduating Medals, Outstanding Performance in Communication Arts (Filipino), Outstanding Performance in TVL ICT, 4th Place in MFOT Sineliksik, Zonal Meet Qualifier in Billiards, and DSPC Qualifier. A journey of dedication and excellence!
-    </p>
-    <p class="slide">
-      <img src="Work immersion.jpeg" alt="Achievement 2" style="width:650px; box-shadow:0 0 10px rgba(0,0,0,0.3);">
-      🏛️ Earned a Certification of Completion for my Work Immersion at the Municipal Government of San Felipe, Zambales — diving into real-world experience and learning the ropes of public service firsthand.
-    </p>
-    <p class="slide">
-      <img src="Dspc.jpg" alt="Achievement 3" style="width:650px; border-radius:12px; box-shadow:0 0 10px rgba(0,0,0,0.3);">
-      📰 Division Press Conference Qualifier for two consecutive years (2024 and 2025)! Improving my Layout and designing skills while competing at a high level, year after year.
-    </p>
-    <p class="slide">
-      <img src="Billiards.jpg" alt="Achievement 4" style="width:350px; border-radius:12px; box-shadow:0 0 10px rgba(0,0,0,0.3);">
-      🎱 Billiards powerhouse! From Intramurals Champion to Division Champion, and finally clinching 1st Place at the Zonal level in 2025 — precision, focus, and a lot of practice paid off.
-    </p>
-    <p class="slide">
-      <img src="SHSH.jpg" alt="Achievement 5" style="width:750px; border-radius:12px; box-shadow:0 0 10px rgba(0,0,0,0.3);">
-      🏅 Graduated High School and Senior High School with Honors and Perfect Attendance — a testament to commitment, perseverance, and a love for learning.
-    </p>
-  </div>
-</div>
+    <div class="content-wrapper">
+      <div class="content-left">
+        <header class="header">
+          <p class="title">Achievements</p>
+        </header>
 
+        <div class="content-slider grid">
+          <div class="content-item grid-item">
+            <img src="SHS Grad.jpeg" alt="Achievement 1">
+            <strong>Senior High School Graduate(2025):</strong><br>
+            Proudly graduated with 6 Sparkling medals across academics, co-curricular, and sports! Highlights include Graduating Medals, Outstanding Performance in Communication Arts (Filipino), Outstanding Performance in TVL ICT, 4th Place in MFOT Sineliksik, Zonal Meet Qualifier in Billiards, and DSPC Qualifier. A journey of dedication and excellence!
+          </div>
+          <div class="content-item grid-item">
+            <img src="Work immersion.jpeg" alt="Achievement 2">
+            <strong>Work Immersion(2025):</strong><br>
+            Earned a Certification of Completion for my Work Immersion at the Municipal Government of San Felipe, Zambales — diving into real-world experience and learning the ropes of public service firsthand.
+          </div>
+          <div class="content-item grid-item">
+            <img src="Dspc.jpg" alt="Achievement 3">
+            <strong>DSPC Qualifier (2024&2025):</strong><br>
+            Division Press Conference Qualifier for two consecutive years (2024 and 2025)! Improving my Layout and designing skills while competing at a high level, year after year.
+          </div>
+          <div class="content-item grid-item">
+            <img src="Billiards.jpg" alt="Achievement 4">
+            <strong>Billiards Zonal 1st Place(2025):</strong><br>
+            Billiards powerhouse! From Intramurals Champion to Division Champion, and finally clinching 1st Place at the Zonal level in 2025 — precision, focus, and a lot of practice paid off.
+          </div>
+          <div class="content-item grid-item">
+            <img src="SHSH.jpg" alt="Achievement 5">
+            <strong>With Honors:</strong><br>
+            Graduated High School and Senior High School with Honors and Perfect Attendance — a testament to commitment, perseverance, and a love for learning.
+          </div>
+        </div>
+      </div>
+    </div>
 
-
-    <div class="page-buttons" style="justify-content: flex-start;">
+    <div class="page-buttons">
       <div class="page-button" id="prev3">← Previous</div>
+      <div class="page-button" id="next3">Next →</div>
+    </div>
+  </div>
+
+  <!-- PAGE 4 -->
+  <div class="page" id="page4">
+    <div class="site-title">MyPortfolio</div>
+    <nav class="top-right-nav">
+      <a href="#" data-page="1">Home</a>
+      <a href="#" data-page="2">Education</a>
+      <a href="#" data-page="3">Achievements</a>
+      <a href="#" class="active" data-page="4">My Family</a>
+    </nav>
+
+    <div class="content-wrapper">
+      <div class="content-left">
+        <header class="header">
+          <h1 class="name">Arthur Rey Cava</h1>
+          <p class="title">My Family</p>
+        </header>
+
+        <div class="content-slider grid">
+          <div class="content-item grid-item">
+            <img src="2.png" alt="Family Member 1">
+            <strong>Mother:</strong><br>
+            My mother is the heart of our family because she made me grow with a pure and beautiful heart, always cheering me on and making every day feel lighter and brighter.
+          </div>
+          <div class="content-item grid-item">
+            <img src="1.png" alt="Family Member 2">
+            <strong>Father:</strong><br>
+            My father is my roots because he teachs me to be a good man like him, showing me through his hard work and humor how to stay strong and keep moving forward.
+          </div>
+          <div class="content-item grid-item">
+            <img src="3.png" alt="Family Member 3">
+            <strong>Sibling:</strong><br>
+            My siblings are my best friend, turning ordinary days into fun adventures filled with jokes, chaos, and memories.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-buttons">
+      <div class="page-button" id="prev4">← Previous</div>
+      <div></div> <!-- Placeholder for right side -->
     </div>
   </div>
 
@@ -486,89 +420,38 @@
     const pages = {
       1: document.getElementById('page1'),
       2: document.getElementById('page2'),
-      3: document.getElementById('page3')
+      3: document.getElementById('page3'),
+      4: document.getElementById('page4')
     };
+
     function showPage(pageNum) {
-  // Hide all pages
-  Object.values(pages).forEach(p => p.style.display = 'none');
-  
-  // Show the target page
-  pages[pageNum].style.display = 'flex';
+      // Hide all pages
+      Object.values(pages).forEach(p => p.classList.remove('active'));
+      
+      // Show the target page
+      pages[pageNum].classList.add('active');
 
-  // Update top-right nav active underline
-  document.querySelectorAll('.top-right-nav a').forEach(a => a.classList.remove('active'));
-  document.querySelectorAll(`.top-right-nav a[data-page="${pageNum}"]`).forEach(a => a.classList.add('active'));
-
-  // Optional: handle body class if you want special styling for page2
-  if(pageNum == 2){
-    document.body.classList.add('page2-active');
-  } else {
-    document.body.classList.remove('page2-active');
-  }
-}
-
-
-document.querySelectorAll('.top-right-nav a').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    const pageNum = link.getAttribute('data-page');
-    showPage(pageNum);
-
-    // BODY CLASS FOR TOP ALIGN
-    if(pageNum == "2"){
-      document.body.classList.add('page2-active');
-    } else {
-      document.body.classList.remove('page2-active');
+      // Update top-right nav active underline
+      document.querySelectorAll('.top-right-nav a').forEach(a => a.classList.remove('active'));
+      document.querySelectorAll(`.top-right-nav a[data-page="${pageNum}"]`).forEach(a => a.classList.add('active'));
     }
 
-    document.querySelectorAll('.top-right-nav a').forEach(a => a.classList.remove('active'));
-    document.querySelectorAll(`.top-right-nav a[data-page="${pageNum}"]`).forEach(a => a.classList.add('active'));
-  });
-});
-
+    document.querySelectorAll('.top-right-nav a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const pageNum = link.getAttribute('data-page');
+        showPage(pageNum);
+      });
+    });
 
     // Page buttons
-document.getElementById('next1').addEventListener('click', () => showPage(2));
-document.getElementById('prev2').addEventListener('click', () => showPage(1));
-document.getElementById('next2').addEventListener('click', () => showPage(3));
-document.getElementById('prev3').addEventListener('click', () => showPage(2));
-
-
-    // Tabs slide logic page1
-    const tabsPage1 = pages[1].querySelectorAll('.tab');
-    const slidesPage1 = pages[1].querySelector('.slides');
-    tabsPage1.forEach((tab,i) => {
-      tab.addEventListener('click', () => {
-        tabsPage1.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
-        tab.classList.add('active'); tab.setAttribute('aria-selected','true');
-        slidesPage1.style.transform = `translateX(-${i*20}%)`;
-      });
-    });
-
-    // Tabs slide logic page2
-    const tabsPage2 = pages[2].querySelectorAll('.tab');
-    const slidesPage2 = pages[2].querySelector('.slides');
-    tabsPage2.forEach((tab,i) => {
-      tab.addEventListener('click', () => {
-        tabsPage2.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
-        tab.classList.add('active'); tab.setAttribute('aria-selected','true');
-        slidesPage2.style.transform = `translateX(-${i*20}%)`;
-      });
-    });
-    // Tabs slide logic page 3
-const tabsPage3 = pages[3].querySelectorAll('.tab');
-const slidesPage3 = pages[3].querySelector('.slides');
-tabsPage3.forEach((tab,i) => {
-  tab.addEventListener('click', () => {
-    tabsPage3.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
-    tab.classList.add('active'); tab.setAttribute('aria-selected','true');
-    slidesPage3.style.transform = `translateX(-${i*20}%)`;
-  });
-});
-
+    document.getElementById('next1').addEventListener('click', () => showPage(2));
+    document.getElementById('prev2').addEventListener('click', () => showPage(1));
+    document.getElementById('next2').addEventListener('click', () => showPage(3));
+    document.getElementById('prev3').addEventListener('click', () => showPage(2));
+    document.getElementById('next3').addEventListener('click', () => showPage(4));
+    document.getElementById('prev4').addEventListener('click', () => showPage(3));
   </script>
 
 </body>
 </html>
-
-
